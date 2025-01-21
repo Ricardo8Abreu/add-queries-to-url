@@ -1,10 +1,12 @@
 import verifyData from 'verify-accounting-data'
 
-import { AddQueriesToUrlParams } from './types'
+import { type AddQueriesToUrlParams } from './types'
+
+export type Queries = Record<string, string>;
 
 const addQueriesToUrl = ({ url, queries = {} }: AddQueriesToUrlParams) => {
   const { hasData: hasQueries } = verifyData(queries)
-  
+
   if (!hasQueries) {
     return url
   }
@@ -27,3 +29,5 @@ const addQueriesToUrl = ({ url, queries = {} }: AddQueriesToUrlParams) => {
 }
 
 export default addQueriesToUrl
+
+export * from './types'
