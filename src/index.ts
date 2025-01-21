@@ -1,21 +1,24 @@
 import verifyData from 'verify-accounting-data'
 
-export type Queries = Record<string, string>
+import { AddQueriesToUrlParams } from './types'
 
-const addQueriesToUrl = ({ url, queries }: { url: string, queries?: Queries }) => {
-  if (!queries) {
+const addQueriesToUrl = ({ url, queries = {} }: AddQueriesToUrlParams) => {
+  const { hasData: hasQueries } = verifyData(queries)
+  
+  if (!hasQueries) {
     return url
   }
+
   const objectify = Object.entries(queries)
 
   const filteredData = objectify.filter(([key, value]) => {
-    const { value: hasValue } = verifyData(value)
+    const { hasData: hasValue } = verifyData(value)
     return hasValue
   })
 
-  const { value: hasQueries } = verifyData(filteredData)
+  const { hasData: hasFilteredQueries } = verifyData(filteredData)
 
-  if (hasQueries) {
+  if (hasFilteredQueries) {
     const queryString = new URLSearchParams(filteredData).toString()
     url = url.concat(`?${queryString}`)
   }
