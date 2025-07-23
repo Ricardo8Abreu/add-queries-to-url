@@ -1,4 +1,4 @@
-import verifyData from 'verify-accounting-data'
+import verifyData from '@riki/verify-accounting-data'
 
 import { type AddQueriesToUrlParams } from './types'
 

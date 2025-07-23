@@ -6,4 +6,8 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
+  external: ["verify-accounting-data"],
+  minify: true,
+  target: 'esnext',
+  
 })
